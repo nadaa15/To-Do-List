@@ -7,10 +7,15 @@ let list = document.querySelector(".list-group");
 let All = document.querySelector(".All");
 let Active = document.querySelector(".Active");
 let Completed = document.querySelector(".Completed");
+let alerts = document.querySelector(".alerts")
 
 
 let updatedIndex;
 let tasksArr = [];
+//! Alert messages variables
+let addMsg = "Successfully Added"
+let deleteMsg = "Successfully Deleted"
+let updateMsg = "Successfully Updated"
 
 if (!localStorage.getItem("tasks")) {
   tasksArr = [];
@@ -34,7 +39,8 @@ function addTask() {
     tasksArr.push(task);
     localStorage.setItem("tasks", JSON.stringify(tasksArr)),
     clear()
-    displayTasks(tasksArr)
+  displayTasks(tasksArr)
+  showAlert(addMsg)
 }
 
 //! clear inputs
@@ -44,40 +50,30 @@ function clear() {
     dateInput.value = "";
 }
 
-//! Display tasks
 
+//! Display tasks
 function displayTasks(arr) {
     let tasksList = ``
     for (let i = 0; i < arr.length; i++) {
         tasksList += `<li class="w-100 d-md-flex justify-content-between align-items-center mb-4">
-                                    <div class="list-group-item d-flex justify-content-start align-items-center rounded-0 border-0 bg-transparent">
-                                    <input onclick="markAsDone(${i})" type="checkbox" name="task" id="check" ${
-          arr[i].completed ? "checked" : ""
-        }>
-                                        <p class="lead title fw-normal mb-0 ms-2 ${
-                                          arr[i].completed ? "completed" : ""
-                                        }">${arr[i].title}</p>
-
-                                    </div>
-                                    <div>
-                                        <div class="d-flex flex-row justify-content-end mb-3">
-                                            <i onclick="setFormForUpdate(${i})" type="button" class="fas fa-pencil-alt fa-lg me-3 text-warning"></i>
-                                            <i onclick="deleteTask(${
-                                              arr[i].id
-                                            })" type="button" class="fas fa-trash-alt fa-lg text-danger"></i>
-                                        </div>
-                                        <div class="text-end text-muted">
-                                                <p class="small date mb-0">${
-                                                  arr[i].date
-                                                }</p>
-                                            
-                                        </div>
-                                    </div>
-
-                                </li>`;
+                      <div class="list-group-item d-flex justify-content-start align-items-center rounded-0 border-0 bg-transparent">
+                      <input onclick="markAsDone(${i})" type="checkbox" name="task" id="check" ${arr[i].completed ? "checked" : ""}>
+                        <p class="lead title fw-normal mb-0 ms-2 ${arr[i].completed ? "completed" : ""}">${arr[i].title}</p>
+                      </div>
+                      <div>
+                          <div class="d-flex flex-row justify-content-end mb-3">
+                            <i onclick="setFormForUpdate(${i})" type="button" class="fas fa-pencil-alt fa-lg me-3 text-warning"></i>
+                            <i onclick="deleteTask(${arr[i].id})" type="button" class="fas fa-trash-alt fa-lg text-danger"></i>
+                           </div>
+                          <div class="text-end text-muted">
+                            <p class="small date mb-0">${arr[i].date}</p>
+                          </div>
+                      </div>
+                      </li>`;
         list.innerHTML = tasksList
     }
 }
+
 
 //! Delete task
 
@@ -85,10 +81,12 @@ function deleteTask(id) {
     tasksArr = tasksArr.filter((task) => task.id != id);
     localStorage.setItem("tasks", JSON.stringify(tasksArr));
     list.innerHTML=""
-    displayTasks(tasksArr)
+  displayTasks(tasksArr)
+  showAlert(deleteMsg)
 }
 
-//! Update task
+
+//! Set form for update
 
 function setFormForUpdate(i) {
     updatedIndex = i
@@ -97,6 +95,8 @@ function setFormForUpdate(i) {
     taskInput.value = tasksArr[i].title;
     dateInput.value = tasksArr[i].date;
 }
+
+//! Update task
 function updateTask() {
     addButton.classList.remove("d-none");
     updateButton.classList.add("d-none");
@@ -105,12 +105,15 @@ function updateTask() {
     localStorage.setItem("tasks", JSON.stringify(tasksArr)); 
      list.innerHTML = "";
     displayTasks(tasksArr);
-    clear()
+  clear()
+  showAlert(updateMsg)
+  
 }
 
 updateButton.addEventListener("click", function () {
     updateTask()
 });
+
 
 //! Search Task
 
@@ -132,15 +135,12 @@ searchInput.addEventListener("input", function () {
 
 
 
-
 //! Change Task Status
 
 function markAsDone(i) {
           tasksArr[i].completed == false
             ? (tasksArr[i].completed = true)
             : (tasksArr[i].completed = false);
-
-    console.log(tasksArr[i].completed);
     localStorage.setItem("tasks", JSON.stringify(tasksArr));
     displayTasks(tasksArr)
 }
@@ -186,4 +186,20 @@ Active.addEventListener("click", function () {
 All.addEventListener("click", function () {
   displayTasks(tasksArr)
 });
+
+
+//! Show Alerts
+function showAlert(msg) {
+  let alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.classList.add("alert-success");
+  alert.classList.add("mx-auto");
+  alert.classList.add("mb-0");
+  alert.classList.add("mt-3");
+  alert.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${msg}`
+  alerts.appendChild(alert)
+  setTimeout( ()=> {
+    alert.remove()
+  },3000 )
+}
 

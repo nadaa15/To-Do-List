@@ -54,6 +54,15 @@ ul{
 .title{
     cursor: pointer;
 }
+.alerts{
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    overflow: hidden;
+    z-index: 1050;
+    width: fit-content;
+    transform: translateX(-50%);
+}
 footer{
     background-color: #e6e5e5;
 }
@@ -61,5 +70,9 @@ footer{
 @media screen and (max-width:768px) {
     .input-group{
         margin: auto;
+    }
+    .alert{
+        padding: 8px;
+        font-size: 14px;
     }
 }

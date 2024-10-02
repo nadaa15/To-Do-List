@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
     <nav class="navbar navbar-expand-lg bg-light shadow fixed-top">
         <div class="container ">
             <a class="navbar-brand fw-bold" href="#">Daily Tasks</a>
@@ -28,55 +29,57 @@
                         aria-label="search" aria-describedby="addon-wrapping">
                 </div>
             </div>
+        </div>
     </nav>
     <main>
         <section class="min-vh-100">
             <div class="container py-5">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col">
-                        <div class="flex-row my-5" id="list1">
-                            <div class="card-body py-4 px-4 px-md-5">
+                    <div class="alerts d-flex flex-column justify-content-center align-items-end gap-3"></div>
+                    </div>
+                    <div class="flex-row my-5" id="list1">
+                        <div class="card-body py-4 px-4 px-md-5">
+                            <h1 class="h2 text-center mt-3 mb-4 h1b-3">
+                                <u>My Todo-s</u>
+                            </h1>
 
-                                <h1 class="h2 text-center mt-3 mb-4 h1b-3">
-                                    <u>My Todo-s</u>
-                                </h1>
-
-                                <div class="pb-2 d-flex justify-content-center align-items-center">
-                                    <div class="w-75">
-                                        <div class="d-md-flex gap-3">
-                                            <div class="input-group mb-3">
-                                                <input type="text" class="form-control task-input"
-                                                    placeholder="I want to do..." aria-describedby="button-addon2">
-                                            </div>
-                                            <div class="input-group mb-3">
-                                                <input type="date" class="form-control date-input"
-                                                    placeholder="On date..." aria-describedby="button-addon2">
-                                            </div>
+                            <div class="pb-2 d-flex justify-content-center align-items-center">
+                                <div class="w-75">
+                                    <div class="d-md-flex gap-3">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control task-input"
+                                                placeholder="I want to do..." aria-describedby="button-addon2">
                                         </div>
-
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <button class="btn btn-outline-danger taxt-center" type="submit"
-                                                id="add-btn">Add</button>
-                                        </div>
-
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <button class="btn btn-outline-warning taxt-center d-none" type="submit"
-                                                id="update-btn">Update</button>
+                                        <div class="input-group mb-3">
+                                            <input type="date" class="form-control date-input" placeholder="On date..."
+                                                aria-describedby="button-addon2">
                                         </div>
                                     </div>
-                                </div>
-                                <hr class="my-4">
-                                <div class="d-flex justify-content-center align-items-center gap-5 mb-4">
-                                    <button class="All btn btn-outline-secondary">All</button>
-                                    <button class="Active btn btn-outline-danger">Active</button>
-                                    <button class="Completed btn btn-outline-success">Completed</button>
-                                </div>
 
-                                <ul class="list-group rounded-0 bg-transparent"></ul>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <button class="btn btn-outline-danger text-center" type="button"
+                                            id="add-btn">Add</button>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <button class="btn btn-outline-warning text-center d-none" type="button"
+                                            id="update-btn">Update</button>
+                                    </div>
+                                </div>
                             </div>
+                            <hr class="my-4">
+                            <div class="d-flex justify-content-center align-items-center gap-5 mb-4">
+                                <button class="All btn btn-outline-secondary">All</button>
+                                <button class="Active btn btn-outline-danger">Active</button>
+                                <button class="Completed btn btn-outline-success">Completed</button>
+                            </div>
+
+                            <ul class="list-group rounded-0 bg-transparent"></ul>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </section>
     </main>
